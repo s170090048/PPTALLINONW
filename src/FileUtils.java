@@ -10,7 +10,7 @@ import java.util.Properties;
 
 public class FileUtils {
 
-	private static String[] getFiles(String folder) throws IOException {
+	public static String[] getFiles(String folder) throws IOException {
 		File _folder = new File(folder);
 		String[] filesInFolder;
 
@@ -22,7 +22,7 @@ public class FileUtils {
 		}
 	}
 
-	private static void download(String sURL) throws IOException {
+	public static void download(String sURL) throws IOException {
 
 		int nStartPos = 0;
 		int nRead = 0;
@@ -54,12 +54,12 @@ public class FileUtils {
 
 	}
 
-	private static String uploadload(String url) throws IOException {
+	public static String uploadload(String url) throws IOException {
 		return url;
 
 	}
 
-	private static String getFilePath() {
+	public static String getFilePath() {
 		Properties pros = new Properties();
 		InputStream is = null;
 		try {
@@ -79,7 +79,7 @@ public class FileUtils {
 
 	}
 	
-	private static String[] getFileNames() {
+	public static String[] getFileNames() {
 		Properties pros = new Properties();
 		InputStream is = null;
 		try {
@@ -95,13 +95,43 @@ public class FileUtils {
 			e.printStackTrace();
 		}
 		String[] fileNames = pros.getProperty("getFileNames").split(",");
-		
+		try {
+			is.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return fileNames;
 
 	}
 	
-	
+	public static String  getsUrl() {
+		Properties pros = new Properties();
+		InputStream is = null;
+		try {
+			is = new FileInputStream(new File("config.property"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			pros.load(is);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String sUrl = pros.getProperty("sUrl");
+		
+		try {
+			is.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sUrl;
+
+	}
 	
 
 	// 获得文件长度
