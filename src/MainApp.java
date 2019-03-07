@@ -1,5 +1,7 @@
 import java.util.Timer;
 
+import com.ubs.task.MergeTask;
+
 public class MainApp {
 	public static void main(String[] args) {
 		
