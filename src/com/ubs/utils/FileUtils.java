@@ -6,9 +6,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
+
 
 public class FileUtils {
 
@@ -20,18 +24,17 @@ public class FileUtils {
 		if (_folder.isDirectory()) {
 			filesInFolder = _folder.list();
 			return filesInFolder;
-		} 
-			return null;
-		
-	}
+		}
+		return null;
 
-	
+	}
 
 	public static String getFilePath() {
 		Properties pros = new Properties();
 		InputStream is = null;
 		try {
-			is = new FileInputStream(new File(ClassLoader.getSystemClassLoader().getResource("config.property").getPath()));
+			is = new FileInputStream(
+					new File(ClassLoader.getSystemClassLoader().getResource("config.property").getPath()));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -46,17 +49,18 @@ public class FileUtils {
 		return FilePath;
 
 	}
-	
-	
-	/*@description  获取所需要合并的文件名列表
+
+	/*
+	 * @description 获取所需要合并的文件名列表
 	 * 
 	 * 
-	 * */
+	 */
 	public static String[] getFileNames() {
 		Properties pros = new Properties();
 		InputStream is = null;
 		try {
-			is = new FileInputStream(new File(ClassLoader.getSystemClassLoader().getResource("config.property").getPath()));
+			is = new FileInputStream(
+					new File(ClassLoader.getSystemClassLoader().getResource("config.property").getPath()));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -74,35 +78,32 @@ public class FileUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return fileNames;
 
 	}
-	
-	
-	
-	/*@description  获取所需要合并的文件名列表
+
+	/*
+	 * @description 获取所需要合并的文件名列表
 	 * 
 	 * 
-	 * */
-	public static List<String> getNamesWithFilter(String[] filenames,String filter) {
-		ArrayList<String> filteredFilenames=new ArrayList<String>();
-				
-				for (String filename : filenames) {
-					if(filename.contains(filter)){
-						
-						filteredFilenames.add(filename);
-						
-					}
-				}
-		
-		
-		
+	 */
+	public static List<String> getNamesWithFilter(String[] filenames, String filter) {
+		ArrayList<String> filteredFilenames = new ArrayList<String>();
+
+		for (String filename : filenames) {
+			if (filename.contains(filter)) {
+
+				filteredFilenames.add(filename);
+
+			}
+		}
+
 		return filteredFilenames;
 
 	}
-	
-	public static String  getsUrl() {
+
+	public static String getsUrl() {
 		Properties pros = new Properties();
 		InputStream is = null;
 		try {
@@ -118,7 +119,7 @@ public class FileUtils {
 			e.printStackTrace();
 		}
 		String sUrl = pros.getProperty("sUrl");
-		
+
 		try {
 			is.close();
 		} catch (IOException e) {
@@ -128,7 +129,6 @@ public class FileUtils {
 		return sUrl;
 
 	}
-	
 
 	// 获得文件长度
 	public static long getFileSize(String sURL) {
@@ -162,5 +162,31 @@ public class FileUtils {
 		System.out.println(nFileLength);
 		return nFileLength;
 	}
+
+	/**
+	 * @author Administrator
+	 * @category get filename from url
+	 * @return filename
+	 * @param url
+	 * 
+	 *
+	 */
+/*
+	public static String getFileName(String urlStr) {
+		String fileName = null;
+		try {
+			URL url = new URL(urlStr);
+			URLConnection uc = url.openConnection();
+			fileName = uc.getHeaderField("Content-Disposition");
+			fileName = new String(fileName.getBytes("ISO-8859-1"), "GBK");
+			fileName = URLDecoder.decode(fileName.substring(fileName.indexOf("filename=") + 9), "UTF-8");
+			// log.info("文件名为：" + fileName + " 大小" +
+			// (uc.getContentLength()/1024)+"KB");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return fileName;
+
+	}*/
 
 }

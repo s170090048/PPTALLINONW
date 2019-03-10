@@ -1,35 +1,23 @@
 package com.ubs.task;
-import java.io.IOException;
-import java.util.TimerTask;
+
+import java.util.concurrent.Callable;
 
 import com.ubs.utils.FileUtils;
 import com.ubs.utils.WebUtils;
 
-public class DownLoadTask  extends TimerTask {
-    
-	@Override
-	public void run() {
-//		step1 .  读取所需要下载的文件列表
-		String[] fileNames=FileUtils.getFileNames();
-//	    step2.   读取下载路径	
-		String filePath=FileUtils.getFilePath();
+public class DownLoadTask implements Callable<Object> {
 
+	private String sUrl;
+	private String prefix;
+
+	public DownLoadTask(String sUrl) {
+		this.sUrl = sUrl;
+	}
+
+	@Override
+	public Object call() throws Exception {
 		// TODO Auto-generated method stub
-//      step3.   获取下载链接
-		String sUrl=FileUtils.getsUrl();
-//      step4.   下载文件
-		try {
-			WebUtils.download(sUrl, sUrl);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return;
-		}
-	
-//       Step5. 获取下载的 文件
-		String[]  files=null;
-		files=FileUtils.getFiles(filePath);
-		
+		return WebUtils.download(sUrl, WebUtils.getFileName(prefix, sUrl));
 	}
 
 }

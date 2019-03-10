@@ -1,26 +1,25 @@
 package com.ubs.task;
 
-import java.io.IOException;
-import java.util.TimerTask;
+import java.util.concurrent.Callable;
 
 import com.ubs.utils.WebUtils;
 
-public class UploadTask extends TimerTask{
+public class UploadTask implements Callable {
+
+	public UploadTask(String filefullname, String url) {
+		super();
+		this.filefullname = filefullname;
+		this.url = url;
+	}
+
+	String filefullname;
+	String url;
 
 	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-	
-	
-	try {
-		WebUtils.uploadload(sUrl);
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		return;
-	}
-	
-	
-       }
-}
+	public String call() throws Exception {
 
+		return WebUtils.upload(url, filefullname);
+
+	}
+
+}

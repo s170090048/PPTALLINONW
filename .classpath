@@ -37,6 +37,9 @@
 	<classpathentry kind="lib" path="lib/saxon9-dom.jar"/>
 	<classpathentry kind="lib" path="lib/saxon9.jar"/>
 	<classpathentry kind="lib" path="lib/webharvest_2.jar"/>
+	<classpathentry kind="lib" path="lib/httpclient-4.5.7.jar"/>
+	<classpathentry kind="lib" path="lib/httpcore-4.4.11.jar"/>
+	<classpathentry kind="lib" path="lib/httpmime-4.5.7.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
